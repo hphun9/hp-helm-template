@@ -1,37 +1,37 @@
-{{- define "base-app.name" -}}
+{{- define "hp-app.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end }}
 
-{{- define "base-app.fullname" -}}
+{{- define "hp-app.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else }}
-{{- printf "%s-%s" .Release.Name (include "base-app.name" .) | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-%s" .Release.Name (include "hp-app.name" .) | trunc 63 | trimSuffix "-" -}}
 {{- end }}
 {{- end }}
 
-{{- define "base-app.labels" -}}
-app.kubernetes.io/name: {{ include "base-app.name" . }}
+{{- define "hp-app.labels" -}}
+app.kubernetes.io/name: {{ include "hp-app.name" . }}
 helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/version: {{ .Chart.AppVersion }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
-{{- define "base-app.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "base-app.name" . }}
+{{- define "hp-app.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "hp-app.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
-{{- define "base-app.serviceAccountName" -}}
+{{- define "hp-app.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "base-app.fullname" .) .Values.serviceAccount.name -}}
+{{- default (include "hp-app.fullname" .) .Values.serviceAccount.name -}}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name -}}
 {{- end }}
 {{- end }}
 
-{{- define "base-app.image" -}}
+{{- define "hp-app.image" -}}
 {{- $global := .Values.global.image -}}
 {{- $img := .image | default dict -}}
 {{- $repository := default $global.repository $img.repository -}}
