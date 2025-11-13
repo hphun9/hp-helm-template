@@ -17,8 +17,8 @@ First, thank you for considering contributing! This project is designed to be a 
 2. **Clone** your fork:
 
    ```bash
-   git clone https://github.com/<your-username>/hp-app-helm-chart.git
-   cd hp-app-helm-chart
+   git clone https://github.com/<your-username>/hp-app.git
+   cd hp-app
    ```
 
 3. Make sure you have:
